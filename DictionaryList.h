@@ -24,6 +24,7 @@ private:
     
 public:
     DictionaryList();
+
     DictionaryList(const DictionaryList& other);
     DictionaryList(DictionaryList&& other) noexcept;
     DictionaryList& operator=(const DictionaryList& other);

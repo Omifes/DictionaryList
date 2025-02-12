@@ -63,7 +63,7 @@ void DictionaryList<KeyType, ValueType>::insertItem(const KeyType& key, const Va
             current = current->next;
         }
         if (current != nullptr && current->key == key) {
-            delete newNode; // Удаляем дубликат
+            delete newNode;
             return;
         }
         if (current == head) {
@@ -116,13 +116,13 @@ void DictionaryList<KeyType, ValueType>::deleteNode(Node* node) {
         node->prev->next = node->next;
     }
     else {
-        head = node->next; // Если удаляем первый элемент
+        head = node->next;
     }
     if (node->next != nullptr) {
         node->next->prev = node->prev;
     }
     else {
-        tail = node->prev; // Если удаляем последний элемент
+        tail = node->prev;
     }
     delete node;
     count--;
@@ -153,6 +153,5 @@ void DictionaryList<KeyType, ValueType>::outAll() const {
     }
 }
 
-// Не забудьте инстанцировать шаблонный класс для использования
-template class DictionaryList<std::string, int>; // Пример инстанцирования для std::string и int
-template class DictionaryList<std::string, std::string>; // Пример инстанцирования для std::string и std::string
+template class DictionaryList<std::string, int>;
+template class DictionaryList<std::string, std::string>;

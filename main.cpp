@@ -1,34 +1,63 @@
 ﻿#include "DictionaryList.h"
 #include <iostream>
 
+using namespace std;
+
+void testInsert(DictionaryList<string, int>& dict);
+void testSearch(DictionaryList<string, int>& dict);
+void testDelete(DictionaryList<string, int>& dict);
+void testClear(DictionaryList<string, int>& dict);
+void testOutAll(DictionaryList<string, int>& dict);
+
 int main() {
     setlocale(LC_ALL, "Russian");
 
-    DictionaryList<std::string, int> dict;
+    DictionaryList<string, int> dict;
 
-    // Добавление элементов
+    testInsert(dict);
+    testSearch(dict);
+    testDelete(dict);
+    testClear(dict);
+
+    return 0;
+}
+
+void testInsert(DictionaryList<string, int>& dict) {
+    cout << "Тестирование вставки элементов:" << endl;
     dict.insertItem("apple", 1);
     dict.insertItem("banana", 2);
     dict.insertItem("orange", 3);
     dict.insertItem("kiwi", 4);
+    dict.insertItem("grape", 5);
+    testOutAll(dict);
+}
 
-    // Вывод всех элементов
-    std::cout << "Содержимое словаря:" << std::endl;
-    dict.outAll();
+void testSearch(DictionaryList<string, int>& dict) {
+    cout << "Тестирование поиска элементов:" << endl;
+    cout << "Поиск 'banana': " << (dict.searchItem("banana") ? "найдено" : "не найдено") << endl;
+    cout << "Поиск 'grape': " << (dict.searchItem("grape") ? "найдено" : "не найдено") << endl;
+    cout << "Поиск 'watermelon': " << (dict.searchItem("watermelon") ? "найдено" : "не найдено") << endl;
+}
 
-    // Поиск элемента
-    std::cout << "Поиск 'banana': " << (dict.searchItem("banana") ? "найдено" : "не найдено") << std::endl;
-    std::cout << "Поиск 'grape': " << (dict.searchItem("grape") ? "найдено" : "не найдено") << std::endl;
-
-    // Удаление элемента
+void testDelete(DictionaryList<string, int>& dict) {
+    cout << "Тестирование удаления элементов:" << endl;
     dict.deleteItem("orange");
-    std::cout << "После удаления 'orange':" << std::endl;
-    dict.outAll();
+    cout << "После удаления 'orange':" << endl;
+    testOutAll(dict);
 
-    // Очистка словаря
+    dict.deleteItem("banana");
+    cout << "После удаления 'banana':" << endl;
+    testOutAll(dict);
+}
+
+void testClear(DictionaryList<string, int>& dict) {
+    cout << "Тестирование очистки словаря:" << endl;
     dict.clear();
-    std::cout << "После очистки словаря:" << std::endl;
-    dict.outAll();
+    cout << "После очистки словаря:" << endl;
+    testOutAll(dict);
+}
 
-    return 0;
+void testOutAll(DictionaryList<string, int>& dict) {
+    cout << "Содержимое словаря:" << endl;
+    dict.outAll();
 }
