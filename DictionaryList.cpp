@@ -52,7 +52,12 @@ DictionaryList<KeyType, ValueType>::~DictionaryList() {
 }
 
 template <typename KeyType, typename ValueType>
-void DictionaryList<KeyType, ValueType>::insertItem(const KeyType& key, const ValueType& value) {
+bool DictionaryList<KeyType, ValueType>::insertItem(const KeyType& key, const ValueType& value) {
+    const std::type_info& keyType = typeid(key);
+    if (keyType != typeid(KeyType)) {
+        return false;
+    }
+
     Node* newNode = new Node(key, value);
     if (head == nullptr) {
         head = tail = newNode;
@@ -64,7 +69,7 @@ void DictionaryList<KeyType, ValueType>::insertItem(const KeyType& key, const Va
         }
         if (current != nullptr && current->key == key) {
             delete newNode;
-            return;
+            return false;
         }
         if (current == head) {
             newNode->next = head;
@@ -84,6 +89,7 @@ void DictionaryList<KeyType, ValueType>::insertItem(const KeyType& key, const Va
         }
     }
     count++;
+    return true;
 }
 
 template <typename KeyType, typename ValueType>
@@ -97,6 +103,7 @@ bool DictionaryList<KeyType, ValueType>::searchItem(const KeyType& key) const {
     }
     return false;
 }
+
 template <typename KeyType, typename ValueType>
 bool DictionaryList<KeyType, ValueType>::deleteItem(const KeyType& key) {
     Node* current = head;

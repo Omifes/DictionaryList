@@ -1,5 +1,5 @@
-#ifndef __DICTIONARY_LIST__
-#define __DICTIONARY_LIST__
+#ifndef DICTIONARY_LIST
+#define DICTIONARY_LIST
 
 #include <iostream>
 #include <string>
@@ -21,7 +21,7 @@ private:
     int count;
 
     void deleteNode(Node* node);
-    
+
 public:
     DictionaryList();
 
@@ -31,7 +31,7 @@ public:
     DictionaryList& operator=(DictionaryList&& other) noexcept;
     ~DictionaryList();
 
-    void insertItem(const KeyType& key, const ValueType& value);
+    bool insertItem(const KeyType& key, const ValueType& value);
     bool searchItem(const KeyType& key) const;
     bool deleteItem(const KeyType& key);
     void clear();
